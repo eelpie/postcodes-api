@@ -2,6 +2,7 @@ package uk.co.eelpieconsulting.postcodes.parsing;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -23,7 +24,9 @@ public class FileFinderService {
 
 	public List<File> getDataFiles() {
 		File dataFolderFile = new File(dataFolder);
-		return new ArrayList<File>(FileUtils.listFiles(dataFolderFile, new String[] {"csv"}, false));
+		final List<File> fileList = new ArrayList<File>(FileUtils.listFiles(dataFolderFile, new String[] {"csv"}, false));
+		Collections.sort(fileList);
+		return fileList;
 	}
 	
 }
