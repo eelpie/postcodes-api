@@ -11,11 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import uk.co.eelpieconsulting.common.files.FileInformationService;
 import uk.co.eelpieconsulting.common.views.ViewFactory;
+import uk.co.eelpieconsulting.common.views.json.JsonView;
 import uk.co.eelpieconsulting.postcodes.daos.PostcodeDAO;
 import uk.co.eelpieconsulting.postcodes.parsing.FileFinderService;
 
 @Controller
 public class SearchController {
+	
+	private static final Integer ONE_HOUR = 60 * 60;
 	
 	private final PostcodeDAO postcodeDAO;
 	private final FileFinderService fileFinderService;
@@ -32,14 +35,20 @@ public class SearchController {
 	
 	@RequestMapping("/postcode/{id}")
 	public ModelAndView postcode(@PathVariable String id ) {
-		final ModelAndView mv = new ModelAndView(viewFactory.getJsonView());		
+		final JsonView jsonView = (JsonView) viewFactory.getJsonView();
+		jsonView.setMaxAge(ONE_HOUR);
+		
+		final ModelAndView mv = new ModelAndView(jsonView);		
 		mv.addObject("data", postcodeDAO.getById(id));
 		return mv;
 	}
 	
 	@RequestMapping("/sources")
 	public ModelAndView sources() throws IOException, ParseException {
-		final ModelAndView mv = new ModelAndView(viewFactory.getJsonView());
+		final JsonView jsonView = (JsonView) viewFactory.getJsonView();
+		jsonView.setMaxAge(ONE_HOUR);
+		
+		final ModelAndView mv = new ModelAndView(jsonView);		
 		mv.addObject("data", fileInformationService.makeFileInformationForFiles(fileFinderService.getDataFiles()));
 		return mv;
 	}
