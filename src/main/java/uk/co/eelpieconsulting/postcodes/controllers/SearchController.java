@@ -9,27 +9,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import uk.co.eelpieconsulting.common.files.FileInformationService;
 import uk.co.eelpieconsulting.common.views.ViewFactory;
 import uk.co.eelpieconsulting.postcodes.daos.PostcodeDAO;
+import uk.co.eelpieconsulting.postcodes.parsing.FileFinderService;
 
 @Controller
 public class SearchController {
 	
 	private final PostcodeDAO postcodeDAO;
+	private final FileFinderService fileFinderService;
 	private final ViewFactory viewFactory;
+	private final FileInformationService fileInformationService;
 	
 	@Autowired
-	public SearchController(PostcodeDAO postcodeDAO, ViewFactory viewFactory) {
+	public SearchController(PostcodeDAO postcodeDAO, FileFinderService fileFinderService, ViewFactory viewFactory) {
 		this.postcodeDAO = postcodeDAO;
+		this.fileFinderService = fileFinderService;
 		this.viewFactory = viewFactory;
+		fileInformationService = new FileInformationService();
 	}
 	
 	@RequestMapping("/postcode/{id}")
-	public ModelAndView postcode(@PathVariable String id ) throws IOException, ParseException  {
+	public ModelAndView postcode(@PathVariable String id ) {
 		final ModelAndView mv = new ModelAndView(viewFactory.getJsonView());		
 		mv.addObject("data", postcodeDAO.getById(id));
 		return mv;
 	}
 	
+	@RequestMapping("/sources")
+	public ModelAndView sources() throws IOException, ParseException {
+		final ModelAndView mv = new ModelAndView(viewFactory.getJsonView());
+		mv.addObject("data", fileInformationService.makeFileInformationForFiles(fileFinderService.getDataFiles()));
+		return mv;
+	}
 	
 }
