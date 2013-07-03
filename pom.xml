@@ -11,11 +11,7 @@
 		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>local-dependencies</id>
-			<url>file:${basedir}/lib/repository</url>
-		</repository>
+	<repositories>	
 		<repository>
 			<id>morphia.googlecode.com</id>
 			<name>Morphia Repo at Google Code</name>
@@ -66,7 +62,7 @@
 		<dependency>
 			<groupId>uk.co.eelpieconsulting.common</groupId>
 			<artifactId>common-views</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.5</version>
 		</dependency>
 
 		<dependency>
