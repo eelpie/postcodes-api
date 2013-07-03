@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import uk.co.eelpieconsulting.postcodes.model.Postcode;
+import uk.co.eelpieconsulting.postcodes.model.UnknownPostcodeException;
 
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.query.Query;
@@ -36,9 +37,13 @@ public class PostcodeDAO {
 		return all.asList();
 	}
 
-	public Postcode getById(String id) {
+	public Postcode getById(String id) throws UnknownPostcodeException {
 		final Query<Postcode> query = datastore.createQuery(Postcode.class).field("id").equal(id);
-		return query.get();
+		final Postcode postcode = query.get();
+		if (postcode != null) {
+			return postcode;
+		}
+		throw new UnknownPostcodeException(id);
 	}
 	
 }
