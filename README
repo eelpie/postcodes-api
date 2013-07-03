@@ -1,0 +1,25 @@
+A basic mongo/spring JSON API interface for the Ordance Surveys' Code-Point Open data
+(http://www.ordnancesurvey.co.uk/oswebsite/products/code-point-open).
+
+Parses the CSV data and makes it available as a JSON API with the following end points:
+
+/sources
+Confirm which source CSV files are in use.
+
+/import
+Drop all existing postcodes and import from the CSV files.
+
+
+/postcode/{postcode}
+Look up the details of a given postcode
+
+ie.
+/postcode/TW13NG
+
+{	"postcode": "TW1 3NG",
+    "eastings": 516337,
+    "northings": 173498,
+    "latitude": 51.44852847034579,
+    "longitude": -0.3272537168937331	}
+    
+Location of the mongo database and the source CSV files is controlled from the postcodes.properties file.
