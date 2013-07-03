@@ -23,7 +23,6 @@ public class ImportController {
 		this.viewFactory = viewFactory;
 	}
 	
-	
 	@RequestMapping("/import")
 	public ModelAndView importPricePaidFiles() throws IOException, ParseException  {
 		final ModelAndView mv = new ModelAndView(viewFactory.getJsonView());		

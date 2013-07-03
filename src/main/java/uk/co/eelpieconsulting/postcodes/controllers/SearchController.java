@@ -18,7 +18,7 @@ import uk.co.eelpieconsulting.postcodes.parsing.FileFinderService;
 @Controller
 public class SearchController {
 	
-	private static final Integer ONE_HOUR = 60 * 60;
+	private static final int ONE_HOUR = 60 * 60;
 	
 	private final PostcodeDAO postcodeDAO;
 	private final FileFinderService fileFinderService;
