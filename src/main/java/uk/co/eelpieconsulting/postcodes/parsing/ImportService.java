@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import uk.co.eelpieconsulting.common.geo.LatLong;
+import uk.co.eelpieconsulting.common.geo.model.LatLong;
 import uk.co.eelpieconsulting.postcodes.daos.PostcodeDAO;
 import uk.co.eelpieconsulting.postcodes.model.Postcode;
 import uk.co.eelpieconsulting.postcodes.model.PostcodeLine;
