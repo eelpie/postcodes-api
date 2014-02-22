@@ -42,7 +42,8 @@ public class ImportService {
 			for (PostcodeLine line : lines) {
 				final LatLong latLong = eastingsNorthingsConvertor.convertToLatLong(line.getEastings(), line.getNorthings());
 				final String id = new String(line.getPostcode().replace(" ", ""));
-				Postcode postcode = new Postcode(id, line.getPostcode(), line.getEastings(), line.getNorthings(), latLong.getLatitude(), latLong.getLongitude());
+				
+				final Postcode postcode = new Postcode(id, line.getPostcode(), line.getEastings(), line.getNorthings(), latLong.getLatitude(), latLong.getLongitude());
 				log.debug("Adding postcode: " + postcode);
 				postcodeDAO.save(postcode);
 			}

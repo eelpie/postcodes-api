@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import uk.co.eelpieconsulting.postcodes.model.PostcodeLine;
 import au.com.bytecode.opencsv.CSVReader;
 
+import com.google.common.base.Strings;
+
 @Component
 public class PostcodeFileParser {
 
@@ -19,18 +21,13 @@ public class PostcodeFileParser {
 		final List<PostcodeLine> lines = new ArrayList<PostcodeLine>();
 		
 		final CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(file)));
+		reader.readNext();
+		
 		String [] nextLine;
 		while ((nextLine = reader.readNext()) != null) {
 			lines.add(new PostcodeLine(nextLine[0], 
-					Integer.parseInt(nextLine[1]),
-					Integer.parseInt(nextLine[2]),
-					Integer.parseInt(nextLine[3]),
-					nextLine[4],
-					nextLine[5],
-					nextLine[6],
-					nextLine[7],
-					nextLine[8],
-					nextLine[9]					
+					!Strings.isNullOrEmpty(nextLine[9]) ? Integer.parseInt(nextLine[9]) : 0,
+					!Strings.isNullOrEmpty(nextLine[10]) ? Integer.parseInt(nextLine[10]) : 0
 					));
 		}
 		return lines;

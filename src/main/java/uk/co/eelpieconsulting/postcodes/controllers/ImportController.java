@@ -25,10 +25,8 @@ public class ImportController {
 	
 	@RequestMapping("/import")
 	public ModelAndView importPricePaidFiles() throws IOException, ParseException  {
-		final ModelAndView mv = new ModelAndView(viewFactory.getJsonView());		
 		importService.importPostcodes();
-		mv.addObject("data", "ok");
-		return mv;
+		return new ModelAndView(viewFactory.getJsonView()).addObject("data", "ok");
 	}
 
 	

@@ -13,16 +13,15 @@ public class PostcodeFileParserTest {
 
 	@Test
 	public void canParseSinglePostcodeFile() throws Exception {
-		final File file = new File(this.getClass().getClassLoader().getResource("Data/tw.csv").getFile());
+		final File file = new File(this.getClass().getClassLoader().getResource("example.csv").getFile());
 		final PostcodeFileParser parser = new PostcodeFileParser();
 		
 		final List<PostcodeLine> lines = parser.parseFile(file);
 		
-		assertEquals(11355, lines.size());
+		assertEquals(2, lines.size());
 		
-		final PostcodeLine firstLine = lines.get(0);
+		final PostcodeLine firstLine = lines.get(1);
 		assertEquals("TW1 1AE", firstLine.getPostcode());
-		assertEquals(10, firstLine.getPositionalQualityIndicator());
 		assertEquals(515984, firstLine.getEastings());
 		assertEquals(173661, firstLine.getNorthings());
 	}
