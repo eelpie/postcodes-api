@@ -15,19 +15,12 @@ public class FileFinderService {
 	
 	private final Logger log = Logger.getLogger(FileFinderService.class);
 	
-	@Value("#{postcodes['importFolder']}")
-	private String dataFolder;
+	@Value("${importFolder}")
+	private String importFolder;
 	
-	public FileFinderService() {
-	}
-
-	public void setDataFolder(String dataFolder) {
-		this.dataFolder = dataFolder;
-	}
-
 	public List<File> getDataFiles() {
-		log.info("Searching for input csv files in folder: " + dataFolder);
-		File dataFolderFile = new File(dataFolder);
+		log.info("Searching for input csv files in folder: " + importFolder);
+		File dataFolderFile = new File(importFolder);
 		final List<File> fileList = new ArrayList<File>(FileUtils.listFiles(dataFolderFile, new String[] {"csv"}, false));
 		Collections.sort(fileList);
 		log.info("Found " + fileList.size() + " input files");

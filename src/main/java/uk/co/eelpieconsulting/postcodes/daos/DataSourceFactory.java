@@ -13,10 +13,10 @@ import com.mongodb.MongoException;
 @Component
 public class DataSourceFactory {
 	
-    @Value("#{postcodes['mongoHost']}")
+	@Value("${mongoHost}")
     private String mongoHost;
     
-    @Value("#{postcodes['mongoDatabase']}")
+	@Value("${mongoDatabase}")
     private String mongoDatabase;
         
 	public DataSourceFactory() {

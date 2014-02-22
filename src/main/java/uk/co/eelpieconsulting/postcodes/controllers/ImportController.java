@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import uk.co.eelpieconsulting.common.views.EtagGenerator;
 import uk.co.eelpieconsulting.common.views.ViewFactory;
 import uk.co.eelpieconsulting.postcodes.parsing.ImportService;
 
@@ -18,9 +19,9 @@ public class ImportController {
 	private final ViewFactory viewFactory;
 	
 	@Autowired
-	public ImportController(ImportService importService, ViewFactory viewFactory) {
+	public ImportController(ImportService importService) {
 		this.importService = importService;
-		this.viewFactory = viewFactory;
+		this.viewFactory = new ViewFactory(new EtagGenerator());
 	}
 	
 	@RequestMapping("/import")
